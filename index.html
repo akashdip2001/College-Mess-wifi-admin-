@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            text-align: center;
+        }
+        #message {
+            display: none;
+            margin-top: 10px;
+        }
+        .success {
+            background-color: green;
+            color: white;
+        }
+        .error {
+            background-color: red;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 2px solid black;
+            z-index: 1000;
+        }
+        #popup button {
+            margin-top: 10px;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 500;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Enter Password</h1>
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkPassword()">Submit</button>
+        <button onclick="showPopup()">Forgot Password?</button>
+        <div id="message"></div>
+    </div>
+    <div id="overlay"></div>
+    <div id="popup">
+        <p>Contact Akashdip</p>
+        <button onclick="contactWhatsapp()">Whatsapp</button>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        const correctPassword = "Sp@ceTime";
+
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            const message = document.getElementById("message");
+
+            if (password === correctPassword) {
+                document.body.className = 'success';
+                message.textContent = "Correct password!";
+                message.className = '';
+                setTimeout(() => {
+                    window.location.href = "https://drive.google.com/drive/folders/1sXni8RpCNtII1dD1POSDa9YDPMc59KiW";
+                }, 1000);
+            } else {
+                document.body.className = 'error';
+                message.textContent = "Wrong password!";
+                message.className = '';
+                setTimeout(() => {
+                    document.body.className = '';
+                    message.textContent = '';
+                }, 1000);
+            }
+        }
+
+        function showPopup() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function contactWhatsapp() {
+            window.open("https://wa.me/70760033011?text=Asirbad%20mess%203rd%20floor%20Admin%20password%20?", "_blank");
+        }
+    </script>
+</body>
+</html>
