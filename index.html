@@ -8,29 +8,67 @@
         body, html {
             height: 100%;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: Arial, sans-serif;
+            background: url('image1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            transition: background 1s ease-in-out;
         }
+
         #container {
             text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
         }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
         #message {
-            display: none;
             margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
         }
+
         .success {
             background-color: green;
             color: white;
         }
+
         .error {
             background-color: red;
             color: white;
         }
-        .hidden {
-            display: none;
-        }
+
         #popup {
             display: none;
             position: fixed;
@@ -41,10 +79,13 @@
             background: white;
             border: 2px solid black;
             z-index: 1000;
+            animation: fadeIn 1s ease-in-out;
         }
+
         #popup button {
             margin-top: 10px;
         }
+
         #overlay {
             position: fixed;
             top: 0;
@@ -54,6 +95,11 @@
             background: rgba(0, 0, 0, 0.5);
             display: none;
             z-index: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -74,6 +120,8 @@
 
     <script>
         const correctPassword = "Sp@ceTime";
+        const backgroundImages = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+        let currentImageIndex = 0;
 
         function checkPassword() {
             const password = document.getElementById("password").value;
@@ -82,17 +130,20 @@
             if (password === correctPassword) {
                 document.body.className = 'success';
                 message.textContent = "Correct password!";
-                message.className = '';
+                message.className = 'success';
+                message.style.display = 'block';
                 setTimeout(() => {
                     window.location.href = "https://drive.google.com/drive/folders/1sXni8RpCNtII1dD1POSDa9YDPMc59KiW";
                 }, 1000);
             } else {
                 document.body.className = 'error';
                 message.textContent = "Wrong password!";
-                message.className = '';
+                message.className = 'error';
+                message.style.display = 'block';
                 setTimeout(() => {
                     document.body.className = '';
                     message.textContent = '';
+                    message.style.display = 'none';
                 }, 1000);
             }
         }
@@ -110,6 +161,13 @@
         function contactWhatsapp() {
             window.open("https://wa.me/917076033011?text=Asirbad%20mess%203rd%20floor%20Admin%20password%20?", "_blank");
         }
+
+        function changeBackground() {
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            document.body.style.backgroundImage = `url(${backgroundImages[currentImageIndex]})`;
+        }
+
+        setInterval(changeBackground, 5000);
     </script>
 </body>
 </html>
